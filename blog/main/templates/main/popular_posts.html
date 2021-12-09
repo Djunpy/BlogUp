@@ -1,0 +1,13 @@
+<h5>Популярные посты</h5>
+<div class="portfolio-item recent">
+    {% for post in posts %}
+    {% if post.photo %}
+    <img src="{{ post.photo.url }}" width="100" alt="{{ post.title }}">
+    {% endif %}
+    <div class="portfolio-text">
+       <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      <p>{{ post.publish|date:"j E Y" }}</p>
+    </div>
+    {% endfor %}
+</div>
+

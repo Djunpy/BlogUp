@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load nav_tag %}
+{% block title %} {{post.title}} {% endblock %}
+
+
+{% block content %}
+<div class="card mb-3">
+    <div class="card-header">
+        Категория: <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>|
+        {% if post.tags.exists %}
+            {% for tag in post.tags.all %}
+                <span ><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></span>|
+            {% endfor %}
+        {% endif %}
+        <span>Просмотры: {{ post.views }}</span>
+    </div>
+    <div class="card-body">
+        <div class="media">
+            <div class="media-body">
+                {% if post.photo %}
+                <img src="{{ post.photo.url }}" width="540" class="mr-3">
+                {% endif %}
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content|safe }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        {{ post.publish }}
+        {% show_tags %}
+    </div>
+</div>
+
+<article class="comment">
+    <section class="comment-details">
+        {% with comments.count as total_comments %}
+        <h2>{{ total_comments }} comment {{ total_comments|pluralize }}</h2>
+        {% endwith %}
+        <div class="author-name">
+            {% for comment in comments %}
+            <h5><a href="#">{{comment.name}}</a></h5>
+            <p>{{ comment.created }}</p>
+        </div>
+        <div class="comment-body">
+            <p>{{ comment.body }}</p>
+            {% endfor %}
+            {% if comment %}
+                <h2>You comment has been added.</h2>
+            {% else %}
+                <form action="" method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Add comment"></p>
+                </form>
+            {% endif %}
+        </div>
+    </section>
+</article>
+
+{% include 'main/inc/pagination.html' %}
+{% endblock %}

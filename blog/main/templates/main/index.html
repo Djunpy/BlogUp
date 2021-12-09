@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load nav_tag %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% include 'main/inc/post_card.html' %}
+    {% include 'main/inc/pagination.html' %}
+{% endblock %}

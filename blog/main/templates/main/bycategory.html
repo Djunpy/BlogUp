@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+    {% include 'main/inc/post_card.html' %}
+    {% include 'main/inc/pagination.html' %}
+{% endblock %}

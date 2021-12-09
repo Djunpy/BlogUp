@@ -1,0 +1,23 @@
+<div class="card mb-3">
+    {% for post in posts %}
+        <div class="card-header">
+            Категория: <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
+        </div>
+        <div class="card-body">
+
+            <div class="media">
+                <div class="media-body">
+                    {% if post.photo %}
+                    <img src="{{ post.photo.url }}" width="540" class="mr-3">
+                    {% endif %}
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content|truncatewords_html:40|safe }}</p>
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="card-footer text-muted">
+        {{ post.publish }}
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="tags" style="float: right;">
+    {% for tag in tags %}
+    <span><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></span>
+    {% endfor %}
+</div>
